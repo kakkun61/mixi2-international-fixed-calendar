@@ -54,8 +54,13 @@ func main() {
 	client := application_apiv1.NewApplicationServiceClient(conn)
 
 	// 現在月日を取得
-	now := lib.Time(time.Now())
+	jst, err := time.LoadLocation("Asia/Tokyo")
+	if err != nil {
+		log.Fatalf("failed to load location: %v", err)
+	}
+	now := lib.FromGregorian(time.Now().In(jst))
 	month, day := now.Month(), now.Day()
+	weekday := now.Weekday()
 	var message string
 	switch day {
 	case lib.LeapDay:
@@ -63,7 +68,7 @@ func main() {
 	case lib.YearDay:
 		message = "今日は大みそかです。"
 	default:
-		message = fmt.Sprintf("今日は %d 月 %d 日です。", month, day)
+		message = fmt.Sprintf("今日は %d 月 %d 日で%sです。", month, day, weekdayString(weekday))
 	}
 
 	// ctx を使って gRPC リクエストを送信
@@ -75,4 +80,27 @@ func main() {
 	}
 
 	log.Printf("Post created successfully: %s", resp.String())
+}
+
+func weekdayString(w time.Weekday) string {
+	switch w {
+	case time.Sunday:
+		return "日曜日"
+	case time.Monday:
+		return "月曜日"
+	case time.Tuesday:
+		return "火曜日"
+	case time.Wednesday:
+		return "水曜日"
+	case time.Thursday:
+		return "木曜日"
+	case time.Friday:
+		return "金曜日"
+	case time.Saturday:
+		return "土曜日"
+	case lib.NoWeekday:
+		return "不明な曜日"
+	default:
+		panic("mixi2-international-fixed-calendar: unknown weekday in weekdayString")
+	}
 }
