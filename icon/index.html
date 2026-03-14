@@ -1,0 +1,138 @@
+<html>
+<head>
+  <style>
+    :root {
+      --border-width: 0.8mm;
+      --border-color: rgb(200, 200, 200);
+      --guide-offset: calc(var(--guide-thickness) / 2);
+      --guide-thickness: 1px;
+      --icon-size: 50mm;
+      --paper-border-width: var(--border-width);
+      --paper-height: 25mm;
+      --paper-left: calc((var(--icon-size) - var(--paper-width)) / 2);
+      --paper-radius: 2mm;
+      --paper-top: calc((var(--icon-size) - var(--paper-height) + var(--ring-height)) / 2);
+      --paper-width: 22mm;
+      --ring-color: grey;
+      --ring-height: 4mm;
+      --ring-offset: 5mm;
+      --ring-top: calc(var(--paper-top) - var(--ring-height) / 2);
+      --ring-width: 3mm;
+      --ring-border-width: var(--border-width);
+      --ring-border-color: var(--border-color);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+  </style>
+</head>
+<body style="
+    font-family: 'Verdana', sans-serif;
+    font-size: 10pt;
+  ">
+  <div id="icon" style="
+      position: relative;
+      width: var(--icon-size);
+      height: var(--icon-size);
+      transform: scale(4);
+      transform-origin: top left;
+      border-style: solid;
+      border-width: 1px;
+      border-color: black;
+      box-sizing: content-box;
+    ">
+    <div id="paper" style="
+        position: absolute;
+      top: var(--paper-top);
+      left: var(--paper-left);
+      box-sizing: border-box;
+      overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        width: var(--paper-width);
+        height: var(--paper-height);
+        border-radius: var(--paper-radius);
+        border-style: solid;
+        border-width: var(--paper-border-width);
+        border-color: var(--border-color);
+        background-color: rgb(237, 237, 237);
+      ">
+      <div id="title" style="
+          width: 100%;
+          font-size: 10pt;
+          font-weight: bold;
+          padding-top: 1mm;
+          padding-bottom: 0.5mm;
+          color: white;
+          background-color: blue;
+          border-width: 0;
+          text-align: center;
+          border-bottom: solid var(--paper-border-width) var(--ring-border-color);
+        ">IFC</div>
+      <div id="day" style="
+          font-family: 'Impact', sans-serif;
+          font-size: 25pt;
+          font-weight: bold;
+          margin-top: -0.2mm;
+        ">28</div>
+      <div id="month" style="
+          font-weight: bold;
+          margin-top: -1mm;
+        ">Sol</div>
+      <div id="weekday" style="
+          font-size: 6pt;
+          font-weight: bold;
+          color: gray;
+        ">Saturday</div>
+    </div>
+    <div id="ring-left" style="
+        position: absolute;
+        top: var(--ring-top);
+        left: calc(var(--paper-left) + var(--paper-width) / 2 - var(--ring-offset));
+        transform: translateX(-50%);
+        width: var(--ring-width);
+        height: var(--ring-height);
+        border-radius: 1mm;
+        border-style: solid;
+        border-width: var(--ring-border-width);
+        border-color: var(--ring-border-color);
+        background-color: var(--ring-color);
+      "></div>
+    <div id="ring-right" style="
+        position: absolute;
+        top: var(--ring-top);
+        left: calc(var(--paper-left) + var(--paper-width) / 2 + var(--ring-offset));
+        transform: translateX(-50%);
+        width: var(--ring-width);
+        height: var(--ring-height);
+        border-radius: 1mm;
+        border-style: solid;
+        border-width: var(--ring-border-width);
+        border-color: var(--ring-border-color);
+        background-color: var(--ring-color);
+      "></div>
+    <!-- <div id="vertical-guide" style="
+      position: absolute;
+      top: 0;
+      left: calc(var(--icon-size) / 2 - var(--guide-offset));
+      width: var(--guide-thickness);
+      height: 100%;
+      background-color: black;
+    "></div>
+    <div id="horizontal-guide" style="
+      position: absolute;
+      top: calc(var(--icon-size) / 2 - var(--guide-offset));
+      left: 0;
+      width: 100%;
+      height: var(--guide-thickness);
+      background-color: black;
+    "></div> -->
+  </div>
+</body>
+
+</html>
